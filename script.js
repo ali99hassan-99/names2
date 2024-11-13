@@ -43,7 +43,11 @@ async function searchExcel() {
 
     const result = [];
     window.excelData.forEach((row, index) => {
-        if (index !== 0 && row[0] && row[0].toString().toLowerCase().includes(searchValue)) {
+        if (index === 0) return; // تجاهل الصف الأول (الترويسة)
+        
+        // تحقق من وجود الكلمة المدخلة في أي خلية من الصف
+        const rowMatch = row.some(cell => cell && cell.toString().toLowerCase().includes(searchValue));
+        if (rowMatch) {
             result.push(row);
         }
     });
@@ -51,7 +55,7 @@ async function searchExcel() {
     if (result.length === 0) {
         alert('الاسم غير موجود.');
     } else {
-        displayExcel([window.excelData[0], ...result]);
+        displayExcel([window.excelData[0], ...result]); // عرض النتائج مع الترويسة
     }
 }
 
