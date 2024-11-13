@@ -44,7 +44,7 @@ async function searchExcel() {
     const result = [];
     window.excelData.forEach((row, index) => {
         if (index === 0) return; // تجاهل الصف الأول (الترويسة)
-        
+
         // تحقق من وجود الكلمة المدخلة في أي خلية من الصف
         const rowMatch = row.some(cell => cell && cell.toString().toLowerCase().includes(searchValue));
         if (rowMatch) {
